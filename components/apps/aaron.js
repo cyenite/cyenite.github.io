@@ -15,7 +15,20 @@ export class AboutCyenite extends Component {
 
     componentDidMount() {
         this.screens = {
-            "about": <About />,
+            "about": <>
+                <About />
+                <br />
+                <div
+                    onClick={this.showNavBar}
+                    className={
+                        (!this.state.navbar ? " visible " : " invisible ") +
+                        "w-max py-0.5 px-1.5 text-ubt-grey text-opacity-90 text-sm bg-ub-grey bg-opacity-70 border-gray-400 border border-opacity-40 rounded-md"
+                    }
+                >
+                    Show More
+                </div>
+                <br />
+            </>,
             "skills": <Skills />,
             "projects": <Projects />,
             "education": <Education />,

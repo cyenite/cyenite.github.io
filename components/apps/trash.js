@@ -6,24 +6,24 @@ export class Trash extends Component {
         super();
         this.trashItems = [
             {
-                name: "php",
+                name: "failed Experiment.php",
                 icon: "./themes/filetypes/php.png"
             },
             {
-                name: "Angular.js",
+                name: "this Used To Work.js",
                 icon: "./themes/filetypes/js.png"
             },
             {
-                name: "node_modules",
+                name: "node_modules (87 GB)",
                 icon: "./themes/Yaru/system/folder.png"
             },
 
             {
-                name: "abandoned project",
+                name: "Abandoned Projects",
                 icon: "./themes/Yaru/system/folder.png"
             },
             {
-                name: "18BCP127 assignment name.zip",
+                name: "final assignment (12).zip",
                 icon: "./themes/filetypes/zip.png"
             },
             {
