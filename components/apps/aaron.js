@@ -30,8 +30,8 @@ export class AboutCyenite extends Component {
                 <br />
             </>,
             "skills": <Skills />,
-            "projects": <Projects />,
             "education": <Education />,
+            "projects": <Projects />,
             "resume": <Resume />,
         }
 
@@ -75,13 +75,13 @@ export class AboutCyenite extends Component {
                     <img className=" w-3 md:w-4" alt="cyenite' skills" src="./themes/Yaru/status/skills.svg" />
                     <span className=" ml-1 md:ml-2 text-gray-50 ">Skills</span>
                 </div>
-                <div id="projects" tabIndex="0" onFocus={this.changeScreen} className={(this.state.active_screen === "projects" ? " bg-ub-orange bg-opacity-100 hover:bg-opacity-95" : " hover:bg-gray-50 hover:bg-opacity-5 ") + " w-28 md:w-full md:rounded-none rounded-sm cursor-default outline-none py-1.5 focus:outline-none duration-100 my-0.5 flex justify-start items-center pl-2 md:pl-2.5"}>
-                    <img className=" w-3 md:w-4" alt="cyenite' projects" src="./themes/Yaru/status/projects.svg" />
-                    <span className=" ml-1 md:ml-2 text-gray-50 ">Projects</span>
-                </div>
                 <div id="education" tabIndex="0" onFocus={this.changeScreen} className={(this.state.active_screen === "education" ? " bg-ub-orange bg-opacity-100 hover:bg-opacity-95" : " hover:bg-gray-50 hover:bg-opacity-5 ") + " w-28 md:w-full md:rounded-none rounded-sm cursor-default outline-none py-1.5 focus:outline-none duration-100 my-0.5 flex justify-start items-center pl-2 md:pl-2.5"}>
                     <img className=" w-3 md:w-4" alt="cyenite' education" src="./themes/Yaru/status/education.svg" />
                     <span className=" ml-1 md:ml-2 text-gray-50 ">Education</span>
+                </div>
+                <div id="projects" tabIndex="0" onFocus={this.changeScreen} className={(this.state.active_screen === "projects" ? " bg-ub-orange bg-opacity-100 hover:bg-opacity-95" : " hover:bg-gray-50 hover:bg-opacity-5 ") + " w-28 md:w-full md:rounded-none rounded-sm cursor-default outline-none py-1.5 focus:outline-none duration-100 my-0.5 flex justify-start items-center pl-2 md:pl-2.5"}>
+                    <img className=" w-3 md:w-4" alt="cyenite' projects" src="./themes/Yaru/status/projects.svg" />
+                    <span className=" ml-1 md:ml-2 text-gray-50 ">Projects</span>
                 </div>
                 <div id="resume" tabIndex="0" onFocus={this.changeScreen} className={(this.state.active_screen === "resume" ? " bg-ub-orange bg-opacity-100 hover:bg-opacity-95" : " hover:bg-gray-50 hover:bg-opacity-5 ") + " w-28 md:w-full md:rounded-none rounded-sm cursor-default outline-none py-1.5 focus:outline-none duration-100 my-0.5 flex justify-start items-center pl-2 md:pl-2.5"}>
                     <img className=" w-3 md:w-4" alt="cyenite's resume" src="./themes/Yaru/status/download.svg" />
@@ -138,7 +138,7 @@ function About() {
                 <div className="bg-white absolute rounded-full p-0.5 md:p-1 top-0 transform -translate-y-1/2 right-0"></div>
             </div>
             <ul className=" mt-4 leading-tight tracking-tight text-sm md:text-base w-5/6 md:w-3/4 emoji-list">
-                <li className=" list-pc">Currently working at <u className=' cursor-pointer '><a href="https:/fleetsimplify.com" target={"_blank"}>Fleetsimplify</a> </u>as a <span className=" font-medium">Mobile Engineer</span>.</li>
+                <li className=" list-pc">Currently working at <u className=' cursor-pointer '><a href="https:/fleetsimplify.com" target={"_blank"}>Fleetsimplify</a></u> as a <span className=" font-medium">Mobile Engineer</span>.</li>
                 <li className=" mt-3 list-building"> I enjoy building awesome software that solve practical problems.</li>
                 <li className=" mt-3 list-time"> When I am not coding my next project, I like to spend my time listening to audiobooks, playing guitar or gaming.</li>
                 <li className=" mt-3 list-star"> And I also have interest in Stock Markets, Automotive Technology, IOT and Computer Vision!</li>
