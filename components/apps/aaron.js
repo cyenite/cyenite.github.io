@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import ReactGA from 'react-ga';
+import ReactGA from 'react-ga4';
+import Script from 'next/script';
 
 export class AboutCyenite extends Component {
 
@@ -51,7 +52,8 @@ export class AboutCyenite extends Component {
         localStorage.setItem("about-section", screen);
 
         // google analytics
-        ReactGA.pageview(`/${screen}`);
+        //ReactGA.pageview(`/${screen}`);
+        ReactGA.send({ hitType: "pageview", page: `/${screen}`, title: screen + " Page" });
 
         this.setState({
             screen: this.screens[screen],
@@ -496,6 +498,18 @@ function Projects() {
 
     return (
         <>
+            {/* <div className="container">
+                <Script src="https://www.googletagmanager.com/gtag/js?id=G-MD8QD02FWZ" />
+                <Script id="google-analytics">
+                    {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+ 
+          gtag('config', 'G-MD8QD02FWZ');
+        `}
+                </Script>
+            </div> */}
             <div className=" font-medium relative text-2xl mt-2 md:mt-4 mb-4">
                 Projects
                 <div className="absolute pt-px bg-white mt-px top-full w-full">

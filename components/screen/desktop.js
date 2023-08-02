@@ -8,7 +8,7 @@ import AllApplications from '../screen/all-applications'
 import DesktopMenu from '../context menus/desktop-menu';
 import DefaultMenu from '../context menus/default';
 import $ from 'jquery';
-import ReactGA from 'react-ga';
+import ReactGA from 'react-ga4';
 
 export class Desktop extends Component {
     constructor() {
@@ -36,7 +36,8 @@ export class Desktop extends Component {
 
     componentDidMount() {
         // google analytics
-        ReactGA.pageview("/desktop");
+        //ReactGA.pageview("/desktop");
+        ReactGA.send({ hitType: "pageview", page: "/desktop", title: "Desktop Page" });
 
         this.fetchAppsData();
         this.setContextListeners();
