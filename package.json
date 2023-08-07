@@ -13,7 +13,6 @@
     "node": ">=16.x"
   },
   "dependencies": {
-    "@eisberg-labs/next-google-analytics": "^5.0.1",
     "@emailjs/browser": "^3.10.0",
     "autoprefixer": "^10.4.13",
     "expr-eval": "^2.0.2",

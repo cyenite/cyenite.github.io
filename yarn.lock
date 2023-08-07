@@ -2,11 +2,6 @@
 # yarn lockfile v1
 
 
-"@eisberg-labs/next-google-analytics@^5.0.1":
-  "integrity" "sha512-uQy8zKPLgUqp/wWhjgjj1Xg8/rLSbN46SCzsD0wu9TknlvAIm3AZ/ZE8f67xmJ9aab+y6lYI+Sv2wAuT6nHSaQ=="
-  "resolved" "https://registry.npmjs.org/@eisberg-labs/next-google-analytics/-/next-google-analytics-5.0.1.tgz"
-  "version" "5.0.1"
-
 "@emailjs/browser@^3.10.0":
   "integrity" "sha512-pregUOBkSjjctQoAgn8DcSaeY4ypHjXAJEzWlJysM3RkQXw1ulavfHva3YYeAkxfJ7qbIhpyvRmhyQlgNG4GVg=="
   "resolved" "https://registry.npmjs.org/@emailjs/browser/-/browser-3.10.0.tgz"
@@ -361,7 +356,7 @@
   "resolved" "https://registry.npmjs.org/nanoid/-/nanoid-3.3.4.tgz"
   "version" "3.3.4"
 
-"next@^13.0.0", "next@^13.1.2":
+"next@^13.1.2":
   "integrity" "sha512-eHfnru9x6NRmTMcjQp6Nz0J4XH9OubmzOa7CkWL+AUrUxpibub3vWwttjduu9No16dug1kq04hiUUpo7J3m3Xw=="
   "resolved" "https://registry.npmjs.org/next/-/next-13.4.12.tgz"
   "version" "13.4.12"
@@ -509,7 +504,7 @@
   "resolved" "https://registry.npmjs.org/quick-lru/-/quick-lru-5.1.1.tgz"
   "version" "5.1.1"
 
-"react-dom@^15.5.x || ^16.x || ^17.x || ^18.x", "react-dom@^18.0.0", "react-dom@^18.2.0", "react-dom@>= 16.3.0":
+"react-dom@^15.5.x || ^16.x || ^17.x || ^18.x", "react-dom@^18.2.0", "react-dom@>= 16.3.0":
   "integrity" "sha512-6IMTriUmvsjHUjNtEDudZfuDQUoWXVxKHhlEGSk81n4YFS+r/Kl99wXiwlVXtPBtJenozv2P+hxDsw9eA7Xo6g=="
   "resolved" "https://registry.npmjs.org/react-dom/-/react-dom-18.2.0.tgz"
   "version" "18.2.0"
@@ -540,7 +535,7 @@
   "resolved" "https://registry.npmjs.org/react-onclickoutside/-/react-onclickoutside-6.12.2.tgz"
   "version" "6.12.2"
 
-"react@^15.5.x || ^16.x || ^17.x || ^18.x", "react@^18.0.0", "react@^18.2.0", "react@>= 16.3.0", "react@>= 16.8.0 || 17.x.x || ^18.0.0-0":
+"react@^15.5.x || ^16.x || ^17.x || ^18.x", "react@^18.2.0", "react@>= 16.3.0", "react@>= 16.8.0 || 17.x.x || ^18.0.0-0":
   "integrity" "sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ=="
   "resolved" "https://registry.npmjs.org/react/-/react-18.2.0.tgz"
   "version" "18.2.0"
