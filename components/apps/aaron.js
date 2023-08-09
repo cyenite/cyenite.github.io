@@ -217,13 +217,10 @@ function Skills() {
             </div>
             <ul className=" tracking-tight text-sm md:text-base w-10/12 emoji-list">
                 <li className=" list-arrow text-sm md:text-base mt-4 leading-tight tracking-tight">
-                    I've worked with a wide variety of programming languages & frameworks.
+                    <div>My areas of expertise are <strong className="text-ubt-gedit-orange"> front-end development with Dart, HTML, Javascript and backend development with C#, Python & PHP laravel</strong></div>
                 </li>
                 <li className=" list-arrow text-sm md:text-base mt-4 leading-tight tracking-tight">
-                    <div> My areas of expertise are <strong className="text-ubt-gedit-orange"> front-end development with Dart, HTML, Javascript and backend development with C#, Python & PHP laravel</strong></div>
-                </li>
-                <li className=" list-arrow text-sm md:text-base mt-4 leading-tight tracking-tight">
-                    <div>Here are my most frequently used</div>
+                    <div>I'm a software engineer, not entirely a "frameworker", and I believe that all core programming principles are transferable. However, here are my most frequently used;</div>
                 </li>
             </ul>
             <div className="w-full md:w-10/12 flex mt-4">
