@@ -444,7 +444,7 @@ function Projects() {
         {
             name: "Flutter Test Utils",
             date: "Mar 2023",
-            link: "https://github.com/cyenite/flutter_test_utils",
+            link: "https://pub.dev/packages/flutter_test_utils",
             description: [
                 "A flutter library for testing widgets and blocs.",
             ],
@@ -453,7 +453,7 @@ function Projects() {
         {
             name: "GetX Test",
             date: "Apr 2023",
-            link: "https://github.com/cyenite/getx_test",
+            link: "https://pub.dev/packages/getx_test",
             description: [
                 "A flutter library that provides testing utilities for GetX, a powerful state management library for Flutter.",
             ],
@@ -462,11 +462,20 @@ function Projects() {
         {
             name: "Codescribe",
             date: "Jul 2023",
-            link: "https://github.com/cyenite/codescribe",
+            link: "https://plugins.jetbrains.com/plugin/22374-codescribe",
             description: [
                 "An Intellij documentation plugin that uses AI to make coding swifter and save on technical documentation time.",
             ],
             domains: ["kotlin", "OpenAI", "Intellij", "python"]
+        },
+        {
+            name: "Easy graphql",
+            date: "March 2023",
+            link: "https://pub.dev/packages/easy_graphql",
+            description: [
+                "A flutter library that provides an easy-to-use interface for sending GraphQL queries, mutations, and subscriptions to a GraphQL API."
+            ],
+            domains: ["dart", "GraphQL", "Flutter"]
         },
     ];
 
@@ -491,6 +500,7 @@ function Projects() {
         "opencv": "orange-500",
         "javascript": "yellow-300",
         "OpenAI": "red-500",
+        "GraphQL": "red-500",
         "Intellij": "gray-500"
     }
 
