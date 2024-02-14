@@ -132,7 +132,7 @@ function About() {
                 <img className="w-full" src="./images/logos/bitmoji.png" alt="Aaron's Profile" />
             </div>
             <div className=" mt-4 md:mt-8 text-lg md:text-2xl text-center px-1">
-                <div>Howdy! My name is <span className="font-bold">Aaron Kipkoech</span> ,</div>
+                <div>Howdy! My name is <span className="font-bold">Aaron Rono</span> ,</div>
                 <div className="font-normal ml-1">I'm a <span className="text-pink-600 font-bold">Software Engineer!</span></div>
             </div>
             <div className=" mt-4 relative md:my-8 pt-px bg-white w-32 md:w-48">
@@ -143,7 +143,7 @@ function About() {
                 <li className=" list-pc">Currently working at <u className=' cursor-pointer '><a href="https:/fleetsimplify.com" target={"_blank"}>Fleetsimplify</a></u> as a <span className=" font-medium">Mobile Engineer</span>.</li>
                 <li className=" mt-3 list-building"> I enjoy building awesome software that solve practical problems.</li>
                 <li className=" mt-3 list-time"> When I am not coding my next project, I like to spend my time listening to audiobooks, playing guitar or gaming.</li>
-                <li className=" mt-3 list-star"> And I also have interest in Stock Markets, Automotive Technology, IOT and Computer Vision!</li>
+                <li className=" mt-3 list-star"> And I also have interest in Forex & Stock Markets, Automotive Technology, IOT and Computer Vision!</li>
             </ul>
         </>
     )
