@@ -1,6 +1,17 @@
 import React from 'react'
+import { useEffect } from 'react';
+
 
 function BootingScreen(props) {
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            props.turnOn();
+        }, 500);
+
+        return () => clearTimeout(timer); // Cleanup the timer when the component unmounts
+    }, [props.turnOn]); // Only re-run the effect if props.turnOn changes
+
 
     return (
         <div style={
