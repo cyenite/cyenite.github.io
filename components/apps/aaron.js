@@ -268,6 +268,63 @@ function Skills() {
 function Projects() {
     const project_list = [
         {
+            name: "TradeScribe",
+            date: "Dec 2024",
+            link: "https://tradescribe.io",
+            description: [
+                "Web platform for trade journaling and performance analytics, helping traders track strategies and identify patterns.",
+                "Includes trade copier for MT4/MT5 accounts and community building tools.",
+            ],
+            domains: ["javascript", "python", "react", "nodejs", "mongodb"]
+        },
+        {
+            name: "ImageTools",
+            date: "Oct 2024",
+            link: "https://imagetools.xyz",
+            description: [
+                "Web-based platform offering comprehensive image processing tools including resizing, compression, conversion, and EXIF extraction.",
+            ],
+            domains: ["javascript", "react", "nodejs", "python"]
+        },
+        {
+            name: "Devcross",
+            date: "Aug 2024",
+            link: "https://marketplace.visualstudio.com/items?itemName=cyenite.devcross",
+            description: [
+                "VS Code extension generating developer-themed crossword puzzles with Github integration and Gemini API support.",
+            ],
+            domains: ["typescript", "vscode-api", "javascript", "OpenAI"]
+        },
+        {
+            name: "OHLC Stat Map",
+            date: "Jun 2024",
+            link: "https://www.tradingview.com/script/1eHGSpPo-OHLC-Stat-Map-Cyenite/",
+            description: [
+                "TradingView indicator for identifying manipulation ranges and distribution levels using normal and log-normal distributions.",
+                "Visualizes price extremes relative to daily open prices.",
+            ],
+            domains: ["pine-script", "trading", "statistics"]
+        },
+        {
+            name: "Chronomap",
+            date: "Apr 2024",
+            link: "https://www.tradingview.com/script/eUJW9c7w-Chronomap-Cyenite/",
+            description: [
+                "Advanced TradingView indicator for mapping market cycles and major sessions based on Quarterly Theory.",
+                "Includes William's Fractals and HTF candles for additional analysis.",
+            ],
+            domains: ["pine-script", "trading", "technical-analysis"]
+        },
+        {
+            name: "Lot by Risk - cTrader",
+            date: "Feb 2024",
+            link: "https://ctrader.com/products/384",
+            description: [
+                "cTrader tool that automates lot size calculation based on desired risk percentages for precise asset risk control.",
+            ],
+            domains: ["c#", "ctrader-api", "trading"]
+        },
+        {
             name: "DeChat",
             date: "Sep 2018",
             link: "https://github.com/cyenite/Dekut-Chat",
@@ -498,7 +555,17 @@ function Projects() {
         "javascript": "yellow-300",
         "OpenAI": "red-500",
         "GraphQL": "red-500",
-        "Intellij": "gray-500"
+        "Intellij": "gray-500",
+        "pine-script": "blue-500",
+        "trading": "green-400",
+        "statistics": "purple-400",
+        "technical-analysis": "indigo-400",
+        "ctrader-api": "blue-300",
+        "typescript": "blue-600",
+        "vscode-api": "blue-700",
+        "react": "cyan-400",
+        "nodejs": "green-500",
+        "mongodb": "green-600"
     }
 
     project_list.sort((a, b) => new Date(b.date) - new Date(a.date));
