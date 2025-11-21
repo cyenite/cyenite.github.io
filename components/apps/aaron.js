@@ -140,10 +140,10 @@ function About() {
                 <div className="bg-white absolute rounded-full p-0.5 md:p-1 top-0 transform -translate-y-1/2 right-0"></div>
             </div>
             <ul className=" mt-4 leading-tight tracking-tight text-sm md:text-base w-5/6 md:w-3/4 emoji-list">
-                <li className=" list-pc">Currently working at <u className=' cursor-pointer '><a href="https:/fleetsimplify.com" target={"_blank"}>Fleetsimplify</a></u> as a <span className=" font-medium">Mobile Engineer</span>.</li>
+                <li className=" list-pc">Currently working at <u className=' cursor-pointer '><a href="https://solutech.co.ke" target={"_blank"}>Solutech Limited</a></u> as a <span className=" font-medium">Mobile Software Engineer</span>.</li>
                 <li className=" mt-3 list-building"> I enjoy building awesome software that solve practical problems.</li>
                 <li className=" mt-3 list-time"> When I am not coding my next project, I like to spend my time listening to audiobooks, playing guitar or gaming.</li>
-                <li className=" mt-3 list-star"> And I also have interest in Forex & Stock Markets, Automotive Technology, IOT and Computer Vision!</li>
+                <li className=" mt-3 list-star"> And I also have interest in Quantitative Finance, Stock Markets, Automotive Technology, IOT and Computer Vision!</li>
             </ul>
         </>
     )
