@@ -217,7 +217,7 @@ function Skills() {
             </div>
             <ul className=" tracking-tight text-sm md:text-base w-10/12 emoji-list">
                 <li className=" list-arrow text-sm md:text-base mt-4 leading-tight tracking-tight">
-                    <div>My areas of expertise are <strong className="text-ubt-gedit-orange"> front-end development with Dart, HTML, Javascript and backend development with C#, Python & PHP laravel</strong></div>
+                    <div>My areas of expertise are <strong className="text-ubt-gedit-orange"> front-end development with Dart, HTML, Javascript, TypeScript and Vue, and backend development with C#, Python & PHP laravel</strong></div>
                 </li>
                 <li className=" list-arrow text-sm md:text-base mt-4 leading-tight tracking-tight">
                     <div>I'm a software engineer, not entirely a "frameworker", and I believe that all core programming principles are transferable. However, here are my most frequently used;</div>
@@ -238,6 +238,8 @@ function Skills() {
                         <img src="https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E" alt="cyenite javascript" className="m-1" />
                         <img src="https://img.shields.io/badge/-Git-%23F05032?style=flat&logo=git&logoColor=%23ffffff" alt="cyenite git" className="m-1" />
                         <img src="https://img.shields.io/badge/-Firebase-FFCA28?style=flat&logo=firebase&logoColor=ffffff" alt="cyenite firebase" className="m-1" />
+                        <img src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white" alt="cyenite typescript" className="m-1" />
+                        <img src="https://img.shields.io/badge/Rust-000000?style=for-the-badge&logo=rust&logoColor=white" alt="cyenite rust" className="m-1" />
                         <img src="https://img.shields.io/badge/chatGPT-74aa9c?style=for-the-badge&logo=openai&logoColor=white" alt="cyenite openAI" className="m-1" />
                         <img src="https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white" alt="cyenite mongo" className="m-1" />
                         <img src="https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white" alt="cyenite postgress" className="m-1" />
@@ -253,6 +255,7 @@ function Skills() {
                         <img src="https://img.shields.io/badge/-Arduino-00979D?style=for-the-badge&logo=Arduino&logoColor=white" alt="cyenite arduino" className="m-1" />
                         <img src="https://img.shields.io/badge/Xamarin-3199DC?style=for-the-badge&logo=xamarin&logoColor=white" alt="cyenite xamarin" className="m-1" />
                         <img src="https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white" alt="cyenite nodejs" className="m-1" />
+                        <img src="https://img.shields.io/badge/Vue.js-35495E?style=for-the-badge&logo=vuedotjs&logoColor=4FC08D" alt="cyenite vue" className="m-1" />
                     </div>
                 </div>
             </div>
@@ -267,6 +270,60 @@ function Skills() {
 
 function Projects() {
     const project_list = [
+        {
+            name: "Saccofy",
+            date: "Mar 2026",
+            link: "https://github.com/cyenite/saccofy",
+            description: [
+                "Mobile application for managing SACCO (Savings and Credit Cooperative) operations, member accounts, and transactions.",
+            ],
+            domains: ["dart", "flutter", "firebase"]
+        },
+        {
+            name: "Quantcode",
+            date: "Mar 2026",
+            link: "https://github.com/cyenite/quantcode",
+            description: [
+                "Quantitative trading platform with a strategy builder, backtesting engine, trade journal, alerts, and a marketplace for trading strategies.",
+            ],
+            domains: ["typescript", "react"]
+        },
+        {
+            name: "Chemichemi",
+            date: "Mar 2026",
+            link: "https://github.com/cyenite/chemichemi",
+            description: [
+                "Modern Flutter Bible app featuring multiple translations, bookmarks, highlights, notes, daily verse notifications, and full offline support.",
+            ],
+            domains: ["dart", "flutter", "firebase"]
+        },
+        {
+            name: "Noryxon",
+            date: "Mar 2026",
+            link: "https://github.com/cyenite/noryxon",
+            description: [
+                "Crypto payment gateway built with Laravel and Vue, supporting wallet management, live payment monitoring, invoicing, webhooks, and a developer portal with API keys.",
+            ],
+            domains: ["laravel", "vue", "php", "javascript"]
+        },
+        {
+            name: "Fable",
+            date: "Jan 2026",
+            link: "https://github.com/cyenite/fable-flutter",
+            description: [
+                "VS Code extension that transforms Flutter codebases into living documentation — auto-discovers feature modules, parses BDD Gherkin files, and generates AI-assisted README and feature docs.",
+            ],
+            domains: ["typescript", "vscode-api"]
+        },
+        {
+            name: "Tonely",
+            date: "Nov 2025",
+            link: "https://github.com/cyenite/Tonely",
+            description: [
+                "Interactive musical learning application built with TypeScript, helping users learn music theory and instruments.",
+            ],
+            domains: ["typescript", "react"]
+        },
         {
             name: "TradeScribe",
             date: "Dec 2024",
@@ -565,7 +622,9 @@ function Projects() {
         "vscode-api": "blue-700",
         "react": "cyan-400",
         "nodejs": "green-500",
-        "mongodb": "green-600"
+        "mongodb": "green-600",
+        "vue": "green-400",
+        "rust": "orange-600"
     }
 
     project_list.sort((a, b) => new Date(b.date) - new Date(a.date));
