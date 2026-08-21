@@ -1,18 +1,11 @@
-import Ubuntu from "../components/ubuntu";
-import ReactGA from 'react-ga4';
-import Meta from "../components/SEO/Meta";
+import Meta from '../components/SEO/Meta';
+import Survey from '../components/survey/Survey';
 
-//const TRACKING_ID = process.env.NEXT_PUBLIC_TRACKING_ID;
-ReactGA.initialize('G-MD8QD02FWZ');
-
-function App() {
-  return (
-    <>
-      {/* <GoogleAnalytics trackingId={process.env.NEXT_PUBLIC_ANALYTICS_ID} /> */}
-      <Meta />
-      <Ubuntu />
-    </>
-  )
+export default function Home() {
+    return (
+        <>
+            <Meta />
+            <Survey />
+        </>
+    );
 }
-
-export default App;

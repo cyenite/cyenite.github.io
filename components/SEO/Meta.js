@@ -1,53 +1,59 @@
-import React from 'react'
 import Head from 'next/head';
+
+const TITLE = 'Aaron Rono — The Survey';
+const DESCRIPTION =
+    'The portfolio of Aaron Rono, a software engineer trained in geomatics, plotted as a survey sheet: 35 projects as control stations on one continuous plane.';
+const URL = 'https://cyenite.github.io/';
+const IMAGE = `${URL}images/logos/logo_1200.png`;
 
 export default function Meta() {
     return (
         <Head>
-           /* Primary Meta Tags */
-            <title>Aaron Rono's Portfolio - Software Engineer</title>
+            <title>{TITLE}</title>
             <meta charSet="utf-8" />
-            <meta name="title" content="Aaron Rono Portfolio - Software Engineer" />
-            <meta name="description"
-                content="Aaron Rono's (cyenite) Personal Portfolio Website." />
-            <meta name="author" content="Aaron Rono (cyenite)" />
-            <meta name="keywords"
-                content="Aaron Rono's (cyenite) Personal Portfolio Website." />
+            <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+            <meta name="description" content={DESCRIPTION} />
+            <meta name="author" content="Aaron Rono" />
             <meta name="robots" content="index, follow" />
-            <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
-            <meta name="language" content="English" />
-            <meta name="viewport" content="width=device-width, initial-scale=1" />
-            <meta name="theme-color" content="#E95420" />
+            <meta name="theme-color" content="#f1f5f7" />
+            <link rel="canonical" href={URL} />
 
-            /* Search Engine */
-            <meta name="image" content="images/logos/fevicon.png" />
-            /* Schema.org for Google */
-            <meta itemProp="name" content="Aaron Kipkoech Portfolio - Software Engineer" />
-            <meta itemProp="description"
-                content="Aaron Rono's (cyenite) Personal Portfolio Website." />
-            <meta itemProp="image" content="images/logos/fevicon.png" />
-            /* Twitter */
-            <meta name="twitter:card" content="summary" />
-            <meta name="twitter:title" content="Aaron Kipkoech Portfolio - Software Engineer" />
-            <meta name="twitter:description"
-                content="Aaron Rono's (cyenite) Personal Portfolio Website." />
-            <meta name="twitter:site" content="cyenite" />
-            <meta name="twitter:creator" content="cyenite" />
-            <meta name="twitter:image:src" content="images/logos/logo_1024.png" />
-            /* Open Graph general (Facebook, Pinterest & Google+) */
-            <meta name="og:title" content="Aaron Kipkoech Portfolio - Software Engineer" />
-            <meta name="og:description"
-                content="Aaron Rono's (cyenite) Personal Portfolio Website." />
-            <meta name="og:image" content="images/logos/logo_1200.png" />
-            <meta name="og:url" content="http://cyenite.github.io/" />
-            <meta name="og:site_name" content="Cyenite's Personal Portfolio" />
-            <meta name="og:locale" content="en_IN" />
-            <meta name="og:type" content="website" />
+            <meta property="og:type" content="website" />
+            <meta property="og:site_name" content="Aaron Rono — The Survey" />
+            <meta property="og:title" content={TITLE} />
+            <meta property="og:description" content={DESCRIPTION} />
+            <meta property="og:url" content={URL} />
+            <meta property="og:image" content={IMAGE} />
 
-            <link rel="icon" href="images/logos/fevicon.svg" />
-            <link rel="apple-touch-icon" href="images/logos/logo.png" />
-            <link rel="preload" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" as="style" />
-            <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet"></link>
+            <meta name="twitter:card" content="summary_large_image" />
+            <meta name="twitter:title" content={TITLE} />
+            <meta name="twitter:description" content={DESCRIPTION} />
+            <meta name="twitter:image" content={IMAGE} />
+            <meta name="twitter:creator" content="@cyenite" />
+
+            <link rel="icon" href="./images/logos/fevicon.svg" />
+            <link rel="apple-touch-icon" href="./images/logos/logo.png" />
+
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{
+                    __html: JSON.stringify({
+                        '@context': 'https://schema.org',
+                        '@type': 'Person',
+                        name: 'Aaron Rono',
+                        alternateName: 'cyenite',
+                        url: URL,
+                        jobTitle: 'Mobile Software Engineer',
+                        worksFor: { '@type': 'Organization', name: 'Solutech Limited' },
+                        alumniOf: {
+                            '@type': 'CollegeOrUniversity',
+                            name: 'Dedan Kimathi University of Technology',
+                        },
+                        email: 'mailto:aaronokip@gmail.com',
+                        sameAs: ['https://github.com/cyenite', 'https://www.linkedin.com/in/aaronkip/'],
+                    }),
+                }}
+            />
         </Head>
-    )
+    );
 }
