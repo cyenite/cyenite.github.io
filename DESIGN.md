@@ -118,41 +118,21 @@ Four sheets occupy regions of the same space and are reached by panning or by fl
 
 ### Level of detail
 
-Zoom drives density, replacing page hierarchy. Naming is by **triangulation
-order**, which is how a real map decides what to label at a given scale: eight
-primary stations stay named at every scale, the rest resolve as you close in.
+Zoom drives density, replacing page hierarchy. Naming is not a single threshold but a priority, taken from each station's triangulation order, which is how a map decides what to name at a given scale.
 
-| Element | Appears at zoom |
-|---|---|
-| Station glyphs | always |
-| Primary (order 1) names, 8 stations | `>= 0.19` |
-| Secondary (order 2) names, 14 stations | `>= 0.62` |
-| Tertiary (order 3) names, 13 stations | `>= 0.98` |
-| Date and kind under the name | `>= 0.72` |
-| Stack chips beside the glyph | `>= 1.15` |
+| Element | Appears at | Notes |
+|---|---|---|
+| Station glyph | always | Shape encodes kind, independent of colour |
+| First-order name | `≥ 0.19` | The eight published products, named from the overview outward |
+| Second-order name | `≥ 0.62` | Notable work |
+| Third-order name | `≥ 0.98` | Early and archive work |
+| Date and kind | `≥ 0.72` | |
+| Stack tags | `≥ 1.15` | Two tags plus an overflow count |
+| Full callout | on selection | A disclosure, not a zoom threshold |
 
-The full callout, with description, the organised `Built with` list, and the
-outbound link, is not zoom-driven: it opens on click, as a disclosure panel with
-`aria-expanded`. Thirty-five callouts opening themselves at high zoom would be
-noise, and a disclosure is the accessible pattern a screen reader already knows.
+Gates are written as CSS custom properties on the plane and consumed as `opacity`, so crossing a threshold costs one property write rather than a React render. The full callout is deliberately not zoom-driven: thirty-seven expanded callouts at close range would be unreadable, and a disclosure gives screen readers a state to act on.
 
-Positions are relaxed by a **declutter pass** before render: any two stations
-close enough in time for their labels to overlap are pushed apart vertically
-within their band. Verified at zero collisions across all four zoom tiers.
-
-A filter is the exception to all of the above. Selecting a tool forces every
-matching station to be named regardless of scale, so `Flutter` at overview zoom
-names all fifteen.
-
-### Fitting
-
-Sheets are framed from their **rendered box**, measured at flight time, not from
-an authored camera position. A sheet larger than the room available is framed
-from where it starts rather than its middle, so the activities sheet lands on
-its row labels and earliest work and you pan forward through time.
-
-Narrow viewports fit **width only** and frame the top. Fitting the height too
-would shrink sheet prose to 13px to save a gesture the reader is already making.
+Label positions are relaxed apart by a declutter pass over the plotted data. Required clearance is derived per pair from the scale at which both labels first appear together, so primaries get wide separation in plane units and third-order labels, which only ever appear close in, get very little. Verified at zero collisions across every tier.
 
 ### Apparatus
 

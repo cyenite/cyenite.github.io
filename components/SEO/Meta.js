@@ -1,8 +1,10 @@
 import Head from 'next/head';
 
+import { PROJECTS } from '../../data/survey';
+
 const TITLE = 'Aaron Rono — The Survey';
 const DESCRIPTION =
-    'The portfolio of Aaron Rono, a software engineer trained in geomatics, plotted as a survey sheet: 35 projects as control stations on one continuous plane.';
+    `The portfolio of Aaron Rono, a software engineer trained in geomatics, plotted as a survey sheet: ${PROJECTS.length} projects as control stations on one continuous plane.`;
 const URL = 'https://cyenite.github.io/';
 const IMAGE = `${URL}images/logos/logo_1200.png`;
 

@@ -12,12 +12,12 @@ import { usePlane } from './usePlane';
 const useIsomorphicLayoutEffect = typeof window === 'undefined' ? useEffect : useLayoutEffect;
 
 const STATION_ZOOM = 2.2;
-const NARROW = 900;
+const NARROW = 1200;
 const FIT_MIN = 0.22;
 const FIT_MAX = 1.15;
 
 /** Room the apparatus occupies, so a fitted sheet lands in clear space. */
-const SAFE = { top: 96, right: 320, bottom: 112, left: 348 };
+const SAFE = { top: 96, right: 282, bottom: 112, left: 242 };
 const SAFE_NARROW = { top: 60, right: 14, bottom: 106, left: 14 };
 
 /**

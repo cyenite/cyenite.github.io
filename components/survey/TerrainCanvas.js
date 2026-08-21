@@ -175,7 +175,7 @@ function drawGraticule(ctx, view, size, toScreenX, toScreenY) {
     const interval = niceSpan(150 / zoom);
     const { w, h } = size;
     // A phone has no margin to spare for coordinate furniture; the sheet needs it.
-    const labelled = w >= 900;
+    const labelled = w >= 1200;
 
     const startX = Math.floor((view.x - w / 2 / zoom) / interval) * interval;
     const endX = view.x + w / 2 / zoom;

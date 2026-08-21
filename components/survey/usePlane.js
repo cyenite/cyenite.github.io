@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
 
 import {
     ZOOM_MAX,
@@ -13,6 +13,9 @@ import {
     tierFor,
     zoomAbout,
 } from './viewport';
+
+/** useLayoutEffect warns during SSR, where there is no layout to measure. */
+const useIsomorphicLayoutEffect = typeof window === 'undefined' ? useEffect : useLayoutEffect;
 
 const PAN_LIMITS = { x0: -2900, y0: -1300, x1: 4700, y1: 2900 };
 const FLIGHT_MS = 640;
@@ -206,18 +209,44 @@ export function usePlane({ initialView, sheets }) {
         return () => query.removeEventListener('change', sync);
     }, []);
 
+    /**
+     * Measure the root rather than wait to be told about it. A ResizeObserver is
+     * the right primary signal, but it is not guaranteed to have delivered
+     * before the first paint, and some embedded renderers never deliver at all,
+     * which would otherwise pin the viewport to its placeholder size.
+     */
+    const measure = useCallback(() => {
+        const root = rootRef.current;
+        if (!root?.clientWidth) return false;
+        if (root.clientWidth === size.current.w && root.clientHeight === size.current.h) return false;
+        size.current = { w: root.clientWidth, h: root.clientHeight };
+        return true;
+    }, []);
+
+    useIsomorphicLayoutEffect(() => {
+        measure();
+    }, [measure]);
+
     useEffect(() => {
         const root = rootRef.current;
         if (!root) return undefined;
 
-        const observer = new ResizeObserver((entries) => {
-            const box = entries[0].contentRect;
-            size.current = { w: box.width, h: box.height };
-            commitNow();
-        });
+        const sync = () => {
+            if (measure()) commitNow();
+        };
+
+        const observer = new ResizeObserver(sync);
         observer.observe(root);
-        return () => observer.disconnect();
-    }, [commitNow]);
+        window.addEventListener('resize', sync);
+        window.addEventListener('orientationchange', sync);
+        sync();
+
+        return () => {
+            observer.disconnect();
+            window.removeEventListener('resize', sync);
+            window.removeEventListener('orientationchange', sync);
+        };
+    }, [commitNow, measure]);
 
     useEffect(() => {
         const root = rootRef.current;

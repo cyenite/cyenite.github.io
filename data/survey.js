@@ -11,7 +11,7 @@
  */
 
 export const EPOCH = 2018.5;
-export const HORIZON = 2026.35;
+export const HORIZON = 2026.7;
 
 export const BANDS = {
     tooling: -880,
@@ -37,7 +37,7 @@ export const SHEETS = [
         name: 'Control',
         note: 'Primary station and observer',
         view: { x: 0, y: 0, zoom: 1 },
-        bounds: { x: -380, y: -300, w: 760, h: 600 },
+        bounds: { x: -330, y: -300, w: 660, h: 600 },
     },
     {
         id: 'survey',
@@ -53,7 +53,7 @@ export const SHEETS = [
         name: 'Section',
         note: 'Where the training came from',
         view: { x: 0, y: 2050, zoom: 1 },
-        bounds: { x: -380, y: 1700, w: 760, h: 660 },
+        bounds: { x: -330, y: 1700, w: 660, h: 660 },
     },
     {
         id: 'legend',
@@ -61,7 +61,7 @@ export const SHEETS = [
         name: 'Legend',
         note: 'Key, tools, and how to reach me',
         view: { x: -1950, y: 0, zoom: 1 },
-        bounds: { x: -2380, y: -350, w: 760, h: 700 },
+        bounds: { x: -2330, y: -350, w: 660, h: 700 },
     },
 ];
 
@@ -97,8 +97,17 @@ export const PROFILE = [
         name: 'Solutech Limited',
         detail: 'Mobile Software Engineer',
         note: 'Flutter and Dart in production, field-facing logistics and distribution software.',
-        from: 2022.6,
+        from: 2025.17,
         to: HORIZON,
+    },
+    {
+        id: 'fleetsimplify',
+        kind: 'post',
+        name: 'Fleetsimplify',
+        detail: 'Mobile Developer',
+        note: 'Flutter and Dart across fleet and driver operations.',
+        from: 2022.92,
+        to: 2025.17,
     },
     {
         id: 'dekut',
@@ -139,6 +148,30 @@ export const PROFILE = [
 ];
 
 export const PROJECTS = [
+    {
+        id: 'quantcode-newsdesk',
+        kind: 'platform',
+        band: 'quant',
+        name: 'Quantcode Newsdesk',
+        date: 'Aug 2026',
+        year: 2026.58,
+        order: 1,
+        link: 'https://quantcode.net/newsdesk',
+        stack: ['TypeScript', 'React'],
+        blurb: 'Market news desk for the Quantcode platform.',
+    },
+    {
+        id: 'quantcode-options',
+        kind: 'platform',
+        band: 'quant',
+        name: 'Quantcode Options',
+        date: 'Jun 2026',
+        year: 2026.42,
+        order: 1,
+        link: 'https://options.quantcode.net',
+        stack: ['TypeScript', 'React'],
+        blurb: 'Options analytics for the Quantcode platform.',
+    },
     {
         id: 'saccofy',
         kind: 'app',
@@ -661,13 +694,19 @@ function seededOffset(id, spread) {
 }
 
 /**
- * Label declutter. Two stations close in time whose scattered positions also
- * land close vertically would overlap each other's labels at overview scale, so
- * they are relaxed apart within their own band. This is the placement pass a
- * map renderer runs, and it keeps working as projects are added.
+ * Label declutter.
+ *
+ * Two stations need separating only at the scale where both their labels are
+ * on screen, and that scale comes from triangulation order: primaries are named
+ * from the overview outward, so they need wide clearance in plane units, while
+ * third-order labels only appear close in and need very little. Clearance is
+ * therefore derived from each pair's gate rather than fixed, and stations are
+ * relaxed apart inside their own band.
  */
-const MIN_DX = 640;
-const MIN_DY = 84;
+const GATE_ZOOM = { 1: 0.19, 2: 0.62, 3: 0.98 };
+const LABEL_W = 150;
+const LABEL_H = 18;
+const WIDEST_DX = LABEL_W / GATE_ZOOM[1];
 const BAND_REACH = 210;
 
 function declutter(stations) {
@@ -680,17 +719,20 @@ function declutter(stations) {
     for (const members of Object.values(bands)) {
         members.sort((a, b) => a.x - b.x);
 
-        for (let pass = 0; pass < 24; pass += 1) {
+        for (let pass = 0; pass < 60; pass += 1) {
             let moved = false;
 
             for (let i = 0; i < members.length; i += 1) {
                 for (let j = i + 1; j < members.length; j += 1) {
                     const a = members[i];
                     const b = members[j];
-                    if (Math.abs(a.x - b.x) >= MIN_DX) break;
+                    if (b.x - a.x >= WIDEST_DX) break;
+
+                    const zoom = GATE_ZOOM[Math.max(a.order, b.order)];
+                    if (Math.abs(a.x - b.x) >= LABEL_W / zoom) continue;
 
                     const gap = b.y - a.y;
-                    const deficit = MIN_DY - Math.abs(gap);
+                    const deficit = LABEL_H / zoom - Math.abs(gap);
                     if (deficit <= 0) continue;
 
                     const push = (deficit / 2 + 1) * (gap >= 0 ? 1 : -1);

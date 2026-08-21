@@ -16,7 +16,7 @@ The job to be done: answer "is this person unusually good, and at what?" faster 
 
 ## Product Purpose
 
-A portfolio for Aaron Rono (`cyenite`): mobile software engineer at Solutech, trained in Geomatics and Geospatial Information Systems, with roughly 35 shipped projects spanning Flutter mobile apps, Laravel/Vue web platforms, quantitative-finance instruments, GIS and remote-sensing tools, IDE extensions, and embedded IoT.
+A portfolio for Aaron Rono (`cyenite`): mobile software engineer at Solutech, trained in Geomatics and Geospatial Information Systems, with 37 shipped projects spanning Flutter mobile apps, Laravel/Vue web platforms, quantitative-finance instruments, GIS and remote-sensing tools, IDE extensions, and embedded IoT.
 
 The site replaces a forked Ubuntu-desktop-clone template. That template's problem was not aesthetics; it was authorship. Its most memorable quality belonged to someone else, and it is shared with hundreds of other forks. Success here means the interface itself is evidence: something a visitor could not mistake for anyone else's site, and could not have gotten from a template.
 
@@ -46,7 +46,7 @@ Emotional target: the visitor should feel they have been handed a real instrumen
 1. **The interface is the argument.** Nothing on the page should claim Aaron is precise or spatially minded. The apparatus, working coordinate readout, recalculating scale bar, contours derived from real project data, should demonstrate it instead. If a claim can be replaced by a working mechanism, replace it.
 2. **Every cartographic element must actually function.** No decorative map furniture. The scale bar reflects real zoom, the coordinate display reflects real position, the contours are computed from the project data rather than drawn for looks, the grid reference in the URL genuinely restores a viewport. A fake instrument is worse than no instrument.
 3. **Strangeness in the navigation, never in the content.** The way you move through the site is unfamiliar by design. What you find when you arrive, a project's name, date, description, stack, and link, is immediately legible and conventionally structured. Nobody should have to decode a project.
-4. **Zoom is the information architecture.** Level of detail replaces page hierarchy. Far out gives shape and scale of a career; close in gives a single artifact in full. This means the reader controls density instead of scrolling past it.
+4. **Zoom is the information architecture.** Level of detail replaces page hierarchy. Far out gives shape and scale of a career; close in gives a single artifact in full. This means the reader controls density instead of scrolling past it. Because the navigation is unfamiliar, the plot carries its own plain-language key rather than assuming the metaphor explains itself.
 5. **Unconventional does not mean inaccessible.** The plane is driven by real semantic HTML, complete keyboard control, and a sheet index that functions as a document outline for screen readers. The concept has no "simplified version" link because it does not need one.
 
 ## Accessibility & Inclusion

@@ -239,13 +239,13 @@ kbd {
 /* Sheet 01 — Control */
 
 .sheet--control {
-    left: -380px;
+    left: -330px;
     top: -300px;
     display: grid;
-    grid-template-columns: minmax(0, 1fr) 286px;
-    column-gap: 46px;
+    grid-template-columns: minmax(0, 1fr) 264px;
+    column-gap: 40px;
     align-items: start;
-    width: 760px;
+    width: 660px;
     height: 600px;
 }
 
@@ -316,7 +316,7 @@ kbd {
 .origin-mark {
     position: absolute;
     top: 300px;
-    left: 380px;
+    left: 330px;
     z-index: -1;
     display: flex;
     flex-direction: column;
@@ -542,9 +542,9 @@ kbd {
 /* Sheet 03 — Section */
 
 .sheet--section {
-    left: -380px;
+    left: -330px;
     top: 1700px;
-    width: 760px;
+    width: 660px;
     height: 660px;
 }
 
@@ -683,9 +683,9 @@ kbd {
 /* Sheet 04 — Legend */
 
 .sheet--legend {
-    left: -2380px;
+    left: -2330px;
     top: -350px;
-    width: 760px;
+    width: 660px;
     height: 700px;
 }
 
@@ -1197,7 +1197,8 @@ kbd {
     top: 22px;
     left: 22px;
     display: flex;
-    gap: 18px;
+    flex-direction: column;
+    gap: 12px;
     align-items: flex-start;
 }
 
@@ -1235,7 +1236,7 @@ kbd {
     flex-direction: column;
     gap: 10px;
     align-items: stretch;
-    max-width: 268px;
+    max-width: 200px;
 }
 
 .reading {
@@ -1367,7 +1368,7 @@ kbd {
 
 .index {
     pointer-events: auto;
-    min-width: 232px;
+    min-width: 200px;
     border: 1px solid var(--rule);
     background: color-mix(in oklab, var(--sheet) 92%, transparent);
     backdrop-filter: blur(3px);
@@ -1572,7 +1573,7 @@ kbd {
 }
 
 .titleblock {
-    min-width: 292px;
+    min-width: 240px;
     border: 1px solid var(--ink);
     border-top-width: 2px;
     background: color-mix(in oklab, var(--sheet) 94%, transparent);
@@ -1755,7 +1756,7 @@ kbd {
 
 /* ---------- Narrow viewports ---------- */
 
-@media (max-width: 900px) {
+@media (max-width: 1199px) {
     :root {
         --t-display: clamp(2.25rem, 13vw, 3rem);
     }
@@ -1851,6 +1852,7 @@ kbd {
     .apparatus__tl {
         top: 12px;
         left: 12px;
+        flex-direction: row;
         gap: 10px;
     }
 
