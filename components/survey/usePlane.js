@@ -31,6 +31,7 @@ export function usePlane({ initialView, sheets }) {
     const flight = useRef(null);
     const velocity = useRef({ x: 0, y: 0 });
     const flightGuard = useRef(null);
+    const movingTimer = useRef(null);
     const pointers = useRef(new Map());
     const pinch = useRef(null);
     const subscribers = useRef(new Set());
@@ -56,9 +57,16 @@ export function usePlane({ initialView, sheets }) {
         const s = size.current;
 
         if (plane) {
-            const tx = s.w / 2 - v.x * v.zoom;
-            const ty = s.h / 2 - v.y * v.zoom;
-            plane.style.transform = `translate3d(${tx}px, ${ty}px, 0) scale(${v.zoom})`;
+            let tx = s.w / 2 - v.x * v.zoom;
+            let ty = s.h / 2 - v.y * v.zoom;
+
+            // At 1:1 the sheets are printed type, so land them on whole pixels.
+            if (Math.abs(v.zoom - 1) < 0.0005) {
+                tx = Math.round(tx);
+                ty = Math.round(ty);
+            }
+
+            plane.style.transform = `translate(${tx}px, ${ty}px) scale(${v.zoom})`;
             plane.style.setProperty('--inv-zoom', String(1 / v.zoom));
 
             const gates = labelGates(v.zoom);
@@ -89,11 +97,22 @@ export function usePlane({ initialView, sheets }) {
         dirty.current = false;
     }, [clampView, commit]);
 
+    const markMoving = useCallback(() => {
+        const root = rootRef.current;
+        if (!root) return;
+        root.dataset.moving = 'true';
+        clearTimeout(movingTimer.current);
+        movingTimer.current = setTimeout(() => {
+            delete root.dataset.moving;
+        }, 190);
+    }, []);
+
     const commitNow = useCallback(() => {
         clampView();
         commit();
+        markMoving();
         dirty.current = false;
-    }, [clampView, commit]);
+    }, [clampView, commit, markMoving]);
 
     const schedule = useCallback(() => {
         dirty.current = true;
@@ -126,6 +145,7 @@ export function usePlane({ initialView, sheets }) {
             if (dirty.current) {
                 clampView();
                 commit();
+                markMoving();
                 dirty.current = false;
             }
 
@@ -365,7 +385,10 @@ export function usePlane({ initialView, sheets }) {
 
     useEffect(() => {
         commitNow();
-        return () => clearTimeout(flightGuard.current);
+        return () => {
+            clearTimeout(flightGuard.current);
+            clearTimeout(movingTimer.current);
+        };
     }, [commitNow]);
 
     return {

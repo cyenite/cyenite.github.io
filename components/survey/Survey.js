@@ -34,13 +34,15 @@ function fitToSheet(id, size, fallback) {
     const availableW = Math.max(240, size.w - pad.left - pad.right);
     const availableH = Math.max(240, size.h - pad.top - pad.bottom);
 
-    // A phone fits width only and frames the top: shrinking type to fit the
-    // height would cost more than asking someone to pan down a plane they are
-    // already panning around.
-    const raw = narrow
-        ? availableW / el.offsetWidth
-        : Math.min(availableW / el.offsetWidth, availableH / el.offsetHeight);
-    const zoom = Math.min(FIT_MAX, Math.max(FIT_MIN, raw));
+    // Fit on width alone. Shrinking a sheet to fit its height costs legibility
+    // on every glyph, and the plane is pannable by design, so a sheet taller
+    // than the viewport is framed from the top and scrolled into instead.
+    const raw = availableW / el.offsetWidth;
+
+    // Landing a prose sheet on exactly 1:1 keeps its type at native resolution;
+    // any fractional scale puts every glyph on fractional pixels.
+    const fitted = Math.min(FIT_MAX, Math.max(FIT_MIN, raw));
+    const zoom = Math.abs(fitted - 1) < 0.16 ? 1 : fitted;
 
     // When a sheet is larger than the room available, frame where it starts
     // rather than its middle: on the activities sheet that means landing on the

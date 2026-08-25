@@ -67,9 +67,7 @@ export function ControlSheet() {
                 </svg>
                 <p className="origin-mark__label">
                     <span>STN 0</span>
-                    E 251 000
-                    <br />
-                    N 9 799 600
+                    origin
                 </p>
             </div>
 

@@ -193,6 +193,9 @@ kbd {
     width: 0;
     height: 0;
     transform-origin: 0 0;
+}
+
+.survey-root[data-moving='true'] .plane {
     will-change: transform;
 }
 
@@ -239,7 +242,7 @@ kbd {
 /* Sheet 01 — Control */
 
 .sheet--control {
-    left: -330px;
+    left: -376px;
     top: -300px;
     display: grid;
     grid-template-columns: minmax(0, 1fr) 264px;
@@ -310,13 +313,13 @@ kbd {
     position: relative;
     padding: 24px 20px 18px;
     border: 1px solid var(--rule);
-    background: color-mix(in oklab, var(--sheet) 82%, transparent);
+    background: var(--sheet);
 }
 
 .origin-mark {
     position: absolute;
     top: 300px;
-    left: 330px;
+    left: 376px;
     z-index: -1;
     display: flex;
     flex-direction: column;
@@ -462,7 +465,7 @@ kbd {
     min-height: 36px;
     padding: 4px 8px 5px;
     border: 1px solid transparent;
-    background: color-mix(in oklab, var(--sheet) 78%, transparent);
+    background: var(--sheet);
     cursor: pointer;
     text-align: left;
     transition: border-color 140ms var(--ease-out), background 140ms var(--ease-out);
@@ -713,7 +716,7 @@ kbd {
 .legend__box {
     padding: 16px 18px 18px;
     border: 1px solid var(--rule);
-    background: color-mix(in oklab, var(--sheet) 84%, transparent);
+    background: var(--sheet);
 }
 
 .legend__heading {
@@ -1242,8 +1245,7 @@ kbd {
 .reading {
     pointer-events: auto;
     border: 1px solid var(--ink);
-    background: color-mix(in oklab, var(--sheet) 94%, transparent);
-    backdrop-filter: blur(3px);
+    background: var(--sheet);
 }
 
 .reading__summary {
@@ -1370,8 +1372,7 @@ kbd {
     pointer-events: auto;
     min-width: 200px;
     border: 1px solid var(--rule);
-    background: color-mix(in oklab, var(--sheet) 92%, transparent);
-    backdrop-filter: blur(3px);
+    background: var(--sheet);
 }
 
 .index__title {
@@ -1449,8 +1450,7 @@ kbd {
     min-height: 44px;
     padding: 0 14px;
     border: 1px solid var(--rule);
-    background: color-mix(in oklab, var(--sheet) 92%, transparent);
-    backdrop-filter: blur(3px);
+    background: var(--sheet);
     cursor: pointer;
     pointer-events: auto;
     transition: border-color 140ms var(--ease-out);
@@ -1470,8 +1470,7 @@ kbd {
     flex-direction: column;
     pointer-events: auto;
     border: 1px solid var(--rule);
-    background: color-mix(in oklab, var(--sheet) 92%, transparent);
-    backdrop-filter: blur(3px);
+    background: var(--sheet);
 }
 
 .zoomer__button {
@@ -1576,8 +1575,7 @@ kbd {
     min-width: 240px;
     border: 1px solid var(--ink);
     border-top-width: 2px;
-    background: color-mix(in oklab, var(--sheet) 94%, transparent);
-    backdrop-filter: blur(3px);
+    background: var(--sheet);
 }
 
 .titleblock__row {
