@@ -261,7 +261,13 @@ export default function Survey() {
                 data-dragging={plane.isDragging ? 'true' : undefined}
                 data-tier={plane.tier}
             >
-                <TerrainCanvas stations={stations} sheets={SHEETS} plane={plane} cell={cell} />
+                <TerrainCanvas
+                    stations={stations}
+                    sheets={SHEETS}
+                    plane={plane}
+                    activeSheet={plane.activeSheet}
+                    cell={cell}
+                />
 
                 <div className="plane" ref={plane.planeRef} onFocus={onPlaneFocus}>
                     <ControlSheet />

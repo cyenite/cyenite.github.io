@@ -212,9 +212,9 @@ kbd {
     grid-template-columns: auto 1fr;
     align-items: baseline;
     column-gap: 14px;
-    margin-bottom: 22px;
-    padding-bottom: 9px;
-    border-bottom: 2px solid var(--ink);
+    margin-bottom: 26px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--ink);
 }
 
 .sheet__code {
@@ -229,7 +229,7 @@ kbd {
     font-size: var(--t-heading);
     font-stretch: 122%;
     font-weight: 700;
-    letter-spacing: 0.14em;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
 }
 
@@ -263,7 +263,7 @@ kbd {
 }
 
 .plate__handle {
-    color: var(--vermilion-ink);
+    color: var(--ink);
     font-weight: 700;
 }
 
@@ -311,8 +311,8 @@ kbd {
 
 .observations {
     position: relative;
-    padding: 24px 20px 18px;
-    border: 1px solid var(--rule);
+    padding: 26px 22px 20px;
+    border: 1px solid var(--rule-soft);
     background: var(--sheet);
 }
 
@@ -378,7 +378,7 @@ kbd {
 .observations__index {
     font-family: var(--font-mono);
     font-size: var(--t-tick);
-    color: var(--vermilion-ink);
+    color: var(--ink-muted);
 }
 
 .observations__hint {
@@ -490,7 +490,7 @@ kbd {
     font-family: var(--font-mono);
     font-size: var(--t-tick);
     font-weight: 700;
-    color: var(--vermilion-ink);
+    color: var(--ink);
     font-variant-numeric: tabular-nums;
 }
 
@@ -537,7 +537,7 @@ kbd {
     color: var(--ink-muted);
     text-shadow: var(--halo);
     text-transform: uppercase;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.09em;
     transform: scale(var(--inv-zoom));
     transform-origin: 100% 0;
 }
@@ -602,7 +602,7 @@ kbd {
 
 .section__core {
     position: relative;
-    border-bottom: 2px solid var(--ink);
+    border-bottom: 1px solid var(--rule-strong);
 }
 
 .core-band {
@@ -661,7 +661,7 @@ kbd {
     font-family: var(--font-mono);
     font-size: var(--t-tick);
     font-weight: 700;
-    color: var(--vermilion-ink);
+    color: var(--ink-muted);
     letter-spacing: 0.04em;
 }
 
@@ -700,7 +700,7 @@ kbd {
     display: grid;
     grid-template-columns: minmax(0, 1fr) minmax(0, 1.12fr);
     grid-template-rows: auto auto;
-    gap: 16px;
+    gap: 20px;
 }
 
 .legend__box--tools {
@@ -714,8 +714,8 @@ kbd {
 }
 
 .legend__box {
-    padding: 16px 18px 18px;
-    border: 1px solid var(--rule);
+    padding: 18px 20px 20px;
+    border: 1px solid var(--rule-soft);
     background: var(--sheet);
 }
 
@@ -835,7 +835,7 @@ kbd {
 }
 
 .tool[data-weight='high'] .tool__count {
-    color: var(--vermilion-ink);
+    color: var(--ink-muted);
     font-weight: 700;
 }
 
@@ -1026,6 +1026,15 @@ kbd {
     display: none;
 }
 
+/*
+ * Flying between sheets crosses the whole plane. Secondary station detail
+ * smearing past on the way is noise, so only the names travel.
+ */
+.survey-root[data-moving='true'] .station__meta,
+.survey-root[data-moving='true'] .station__stack {
+    opacity: 0;
+}
+
 .tag {
     padding: 1px 5px;
     border: 1px solid var(--rule);
@@ -1118,7 +1127,7 @@ kbd {
     font-family: var(--font-mono);
     font-size: var(--t-tick);
     font-weight: 700;
-    color: var(--vermilion-ink);
+    color: var(--ink-muted);
     text-transform: uppercase;
     letter-spacing: 0.07em;
 }
@@ -1383,7 +1392,7 @@ kbd {
     font-weight: 700;
     color: var(--ink-muted);
     text-transform: uppercase;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.09em;
 }
 
 .index__item {
@@ -1573,8 +1582,7 @@ kbd {
 
 .titleblock {
     min-width: 240px;
-    border: 1px solid var(--ink);
-    border-top-width: 2px;
+    border: 1px solid var(--rule-strong);
     background: var(--sheet);
 }
 
@@ -1606,7 +1614,7 @@ kbd {
 }
 
 .titleblock__row--lead .titleblock__value {
-    color: var(--vermilion-ink);
+    color: var(--ink);
     font-weight: 700;
 }
 
@@ -1707,7 +1715,7 @@ kbd {
     font-family: var(--font-mono);
     font-size: var(--t-tick);
     font-weight: 700;
-    color: var(--vermilion-ink);
+    color: var(--ink-muted);
 }
 
 .palette__badge--glyph .glyph {

@@ -18,7 +18,7 @@ import {
 const useIsomorphicLayoutEffect = typeof window === 'undefined' ? useEffect : useLayoutEffect;
 
 const PAN_LIMITS = { x0: -2900, y0: -1300, x1: 4700, y1: 2900 };
-const FLIGHT_MS = 640;
+const FLIGHT_MS = 540;
 const FRICTION = 0.9;
 const MIN_VELOCITY = 0.02;
 
@@ -97,20 +97,22 @@ export function usePlane({ initialView, sheets }) {
         dirty.current = false;
     }, [clampView, commit]);
 
-    const markMoving = useCallback(() => {
+    const markMoving = useCallback((hold = 190) => {
         const root = rootRef.current;
         if (!root) return;
         root.dataset.moving = 'true';
         clearTimeout(movingTimer.current);
         movingTimer.current = setTimeout(() => {
             delete root.dataset.moving;
-        }, 190);
+            // Repaint once at rest so the terrain can resolve back in.
+            subscribers.current.forEach((fn) => fn(view.current, size.current));
+        }, hold);
     }, []);
 
     const commitNow = useCallback(() => {
         clampView();
-        commit();
         markMoving();
+        commit();
         dirty.current = false;
     }, [clampView, commit, markMoving]);
 
@@ -144,8 +146,8 @@ export function usePlane({ initialView, sheets }) {
 
             if (dirty.current) {
                 clampView();
-                commit();
                 markMoving();
+                commit();
                 dirty.current = false;
             }
 
@@ -179,9 +181,10 @@ export function usePlane({ initialView, sheets }) {
 
             flight.current = { from: { ...view.current }, to, start: performance.now(), duration };
             flightGuard.current = setTimeout(settleFlight, duration + 140);
+            markMoving(duration + 160);
             schedule();
         },
-        [commitNow, schedule, settleFlight]
+        [commitNow, markMoving, schedule, settleFlight]
     );
 
     /** Positive dx moves the camera right, matching what the arrow key says. */

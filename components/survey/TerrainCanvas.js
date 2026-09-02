@@ -4,13 +4,21 @@ import { buildField, contourSet, seedsFrom } from '../../lib/contours';
 import { niceSpan } from './viewport';
 
 const HYPSOMETRIC = [
-    [242, 246, 248],
+    [243, 246, 248],
+    [237, 242, 244],
     [231, 238, 241],
-    [220, 231, 234],
-    [209, 224, 227],
-    [198, 216, 219],
-    [186, 208, 211],
+    [225, 234, 237],
+    [219, 230, 233],
+    [214, 226, 230],
 ];
+
+/**
+ * The relief is evidence on the activities sheet, where it is computed from the
+ * plotted work. Everywhere else it is ground, and prose has to win, so it drops
+ * back. It also thins out while the view is in motion.
+ */
+const GROUND_ALPHA = { survey: 0.92, other: 0.3 };
+const MOVING_ALPHA = 0.55;
 
 // Graticule figures are text, so they take the muted ink, not the hairline grey.
 const LABEL_INK = '#50585f';
@@ -45,7 +53,7 @@ function boundsOf(points) {
     return { x0, y0, x1, y1 };
 }
 
-export default function TerrainCanvas({ stations, sheets, plane, cell = 40 }) {
+export default function TerrainCanvas({ stations, sheets, plane, activeSheet, cell = 40 }) {
     const canvasRef = useRef(null);
     const reliefRef = useRef(null);
 
@@ -87,6 +95,9 @@ export default function TerrainCanvas({ stations, sheets, plane, cell = 40 }) {
         const ctx = canvas.getContext('2d');
 
         const draw = (view, size) => {
+            const onSurvey = activeSheet === 'survey';
+            const moving = canvas.closest('.survey-root')?.dataset.moving === 'true';
+            const ground = (onSurvey ? GROUND_ALPHA.survey : GROUND_ALPHA.other) * (moving ? MOVING_ALPHA : 1);
             const dpr = Math.min(2, window.devicePixelRatio || 1);
             const w = Math.max(1, Math.round(size.w));
             const h = Math.max(1, Math.round(size.h));
@@ -118,12 +129,12 @@ export default function TerrainCanvas({ stations, sheets, plane, cell = 40 }) {
                 const rh = (field.bounds.y1 - field.bounds.y0) * zoom;
                 ctx.imageSmoothingEnabled = true;
                 ctx.imageSmoothingQuality = 'high';
-                ctx.globalAlpha = 0.9;
+                ctx.globalAlpha = ground;
                 ctx.drawImage(relief, rx, ry, rw, rh);
                 ctx.globalAlpha = 1;
             }
 
-            drawGraticule(ctx, view, { w, h }, toScreenX, toScreenY);
+            drawGraticule(ctx, view, { w, h }, toScreenX, toScreenY, { ground, labels: onSurvey && !moving });
 
             const margin = 80;
             const visible = {
@@ -135,6 +146,7 @@ export default function TerrainCanvas({ stations, sheets, plane, cell = 40 }) {
 
             ctx.lineJoin = 'round';
             ctx.lineCap = 'round';
+            ctx.globalAlpha = ground;
 
             for (const level of contours) {
                 ctx.strokeStyle = level.isIndex ? RULE : RULE_SOFT;
@@ -154,11 +166,17 @@ export default function TerrainCanvas({ stations, sheets, plane, cell = 40 }) {
                 }
             }
 
-            if (zoom > 0.34) drawElevationLabels(ctx, contours, visible, toScreenX, toScreenY);
+            ctx.globalAlpha = 1;
+
+            // Floating elevation figures read as clutter over prose, so they
+            // only appear on the sheet where the relief means something.
+            if (onSurvey && !moving && zoom > 0.34) {
+                drawElevationLabels(ctx, contours, visible, toScreenX, toScreenY);
+            }
         };
 
         return plane.subscribe(draw);
-    }, [plane, terrain]);
+    }, [activeSheet, plane, terrain]);
 
     return (
         <canvas
@@ -170,19 +188,21 @@ export default function TerrainCanvas({ stations, sheets, plane, cell = 40 }) {
     );
 }
 
-function drawGraticule(ctx, view, size, toScreenX, toScreenY) {
+function drawGraticule(ctx, view, size, toScreenX, toScreenY, { ground, labels }) {
     const { zoom } = view;
     const interval = niceSpan(150 / zoom);
     const { w, h } = size;
-    // A phone has no margin to spare for coordinate furniture; the sheet needs it.
-    const labelled = w >= 1200;
+    // Coordinate figures need both a caller that wants them and a viewport with
+    // margin to spare; a phone has neither.
+    const labelled = labels && w >= 1200;
 
     const startX = Math.floor((view.x - w / 2 / zoom) / interval) * interval;
     const endX = view.x + w / 2 / zoom;
     const startY = Math.floor((view.y - h / 2 / zoom) / interval) * interval;
     const endY = view.y + h / 2 / zoom;
 
-    ctx.strokeStyle = 'rgba(183, 191, 196, 0.38)';
+    ctx.globalAlpha = ground;
+    ctx.strokeStyle = 'rgba(183, 191, 196, 0.3)';
     ctx.lineWidth = 1;
     ctx.beginPath();
 
@@ -197,6 +217,11 @@ function drawGraticule(ctx, view, size, toScreenX, toScreenY) {
         ctx.lineTo(w, sy);
     }
     ctx.stroke();
+
+    if (!labelled) {
+        ctx.globalAlpha = 1;
+        return;
+    }
 
     // Heavier ticks where the graticule meets the sheet edge, with coordinates.
     ctx.strokeStyle = RULE;
@@ -213,7 +238,7 @@ function drawGraticule(ctx, view, size, toScreenX, toScreenY) {
         ctx.moveTo(sx, h);
         ctx.lineTo(sx, h - 9);
         ctx.stroke();
-        if (labelled && sx > 44 && sx < w - 44) {
+        if (sx > 44 && sx < w - 44) {
             ctx.textAlign = 'center';
             ctx.fillText(String(251000 + Math.round(wx)), sx, 13);
         }
@@ -228,7 +253,7 @@ function drawGraticule(ctx, view, size, toScreenX, toScreenY) {
         ctx.moveTo(w, sy);
         ctx.lineTo(w - 9, sy);
         ctx.stroke();
-        if (labelled && sy > 34 && sy < h - 34) {
+        if (sy > 34 && sy < h - 34) {
             ctx.save();
             ctx.translate(13, sy);
             ctx.rotate(-Math.PI / 2);
