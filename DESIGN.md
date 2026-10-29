@@ -182,6 +182,14 @@ Content is visible by default; transitions only enhance. No reveal is gated on a
 | `ReadingPanel` | Plain-language key to the activities plot. A `<details>`, open on desktop, collapsed on a phone. |
 | `ToolIndex` | Tools grouped by what they are and weighted by how often they were used. Selecting one filters the plot. |
 | `FilterChip` | The active tool filter and its match count, with a clear control. |
+| `ActivityRecord` | Sheet 05 at `/activity/`, off the plane. Reads the daily contribution record published by the `cyenite/cyenite` profile workflow. |
+| `CandleChart` | Inline SVG, one candle per day, green rose and red fell. Drag pans, wheel zooms, arrow keys step a day, `+`/`-` zoom. Every new public repo in view is a labelled pin linking to GitHub; crowded pins stack into extra rows rather than being dropped. |
+
+### Sheet 05: Activity (a deliberate exception)
+
+`/activity/` is the interactive twin of the animated chart on the GitHub profile README, and it is styled to match that chart rather than this system: GitHub Primer colours, light and dark following `prefers-color-scheme`, green and red candles, GitHub's system sans throughout (no mono, no Archivo), and ambient motion (candle entrance, a ticking live candle, a marching close line, a sweep). This breaks the "no dark mode" and "motion is navigation" rules on purpose, by Aaron's choice, so a visitor arriving from the README sees the same instrument. It is deliberately minimal: header, range buttons, day readout and the chart, nothing below it. It opens on three months at every width. The exception is scoped: every token is prefixed `--gh-` and lives on `.record`, so nothing leaks into the survey.
+
+It still keeps the accessibility floor: entrance motion runs only on load or when a range is picked, never during drag or zoom; `prefers-reduced-motion` stops it all; keyboard reads the chart day by day through an `aria-live` readout. It scrolls inside its own fixed container because `html` and `body` never scroll, and it shows a plain loading and error state while `assets/activity.json` is fetched. `NEXT_PUBLIC_RECORD_URL` points it at a local copy in development.
 
 ### Geometry and depth
 

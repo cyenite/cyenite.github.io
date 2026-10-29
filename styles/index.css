@@ -1760,6 +1760,503 @@ kbd {
     margin-right: 3px;
 }
 
+/* ---------- Activity record ---------- */
+
+/* Deliberately GitHub-native rather than plan-sheet: this page is the interactive twin of the profile README chart. */
+.record {
+    --gh-bg: #ffffff;
+    --gh-fg: #1f2328;
+    --gh-muted: #59636e;
+    --gh-subtle: #f6f8fa;
+    --gh-border: #d1d9e0;
+    --gh-grid: rgba(31, 35, 40, 0.1);
+    --gh-up: #1a7f37;
+    --gh-down: #d1242f;
+    --gh-ma: #9a6700;
+    --gh-accent: #0969da;
+    --gh-on-tone: #ffffff;
+    --gh-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif;
+
+    position: fixed;
+    inset: 0;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    background: var(--gh-bg);
+    color: var(--gh-fg);
+    font-family: var(--gh-sans);
+    font-variant-numeric: tabular-nums;
+}
+
+@media (prefers-color-scheme: dark) {
+    .record {
+        --gh-bg: #0d1117;
+        --gh-fg: #f0f6fc;
+        --gh-muted: #9198a1;
+        --gh-subtle: #151b23;
+        --gh-border: #3d444d;
+        --gh-grid: rgba(240, 246, 252, 0.1);
+        --gh-up: #3fb950;
+        --gh-down: #f85149;
+        --gh-ma: #d29922;
+        --gh-accent: #4493f8;
+        --gh-on-tone: #0d1117;
+    }
+}
+
+.record a,
+.record a:hover {
+    color: var(--gh-accent);
+}
+
+.record :focus-visible {
+    outline-color: var(--gh-accent);
+}
+
+.record__sheet {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 20px 32px 48px;
+}
+
+.record__back {
+    display: inline-flex;
+    gap: 6px;
+    align-items: center;
+    min-height: 44px;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.record__state {
+    padding-top: 24px;
+    color: var(--gh-muted);
+}
+
+.headline {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px 24px;
+    justify-content: space-between;
+    margin: 8px 0 24px;
+}
+
+.headline__login,
+.headline__total {
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 1.25;
+}
+
+.headline__figure {
+    text-align: right;
+}
+
+.headline__caption {
+    margin-top: 2px;
+    font-size: 14px;
+    color: var(--gh-muted);
+}
+
+.headline__live {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    margin-top: 8px;
+    font-size: 12px;
+    color: var(--gh-muted);
+}
+
+.headline__live b {
+    font-weight: 600;
+    color: var(--gh-up);
+}
+
+.headline__dot {
+    position: relative;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--gh-up);
+}
+
+.headline__dot::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: var(--gh-up);
+    animation: record-pulse 2s ease-out infinite;
+}
+
+.headline__trend {
+    margin-top: 8px;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--gh-up);
+}
+
+.headline__trend[data-up='false'] {
+    color: var(--gh-down);
+}
+
+.record__controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 20px;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.ranges {
+    display: flex;
+    overflow: hidden;
+    border: 1px solid var(--gh-border);
+    border-radius: 6px;
+}
+
+.ranges__button {
+    min-width: 44px;
+    min-height: 30px;
+    padding: 0 12px;
+    border-left: 1px solid var(--gh-border);
+    cursor: pointer;
+    background: var(--gh-subtle);
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--gh-muted);
+}
+
+.ranges__button:first-child {
+    border-left: 0;
+}
+
+.ranges__button:hover {
+    color: var(--gh-fg);
+}
+
+.ranges__button[aria-pressed='true'] {
+    background: var(--gh-bg);
+    color: var(--gh-fg);
+    font-weight: 600;
+}
+
+.readout {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 14px;
+    font-size: 12px;
+}
+
+.readout__date {
+    font-weight: 600;
+}
+
+.readout__today {
+    font-weight: 400;
+    color: var(--gh-up);
+}
+
+.readout__key {
+    color: var(--gh-muted);
+}
+
+.readout__pair[data-key='MA20'] .readout__key {
+    color: var(--gh-ma);
+}
+
+.chart {
+    position: relative;
+    cursor: crosshair;
+    touch-action: pan-y;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+.chart[data-dragging='true'] {
+    cursor: grabbing;
+}
+
+.chart svg {
+    display: block;
+    overflow: visible;
+}
+
+.chart text {
+    font-family: var(--gh-sans);
+    font-size: 11px;
+    font-variant-numeric: tabular-nums;
+    fill: var(--gh-muted);
+}
+
+.chart__graticule line {
+    stroke: var(--gh-grid);
+}
+
+.candle__wick {
+    stroke: var(--gh-up);
+    stroke-width: 1.2;
+}
+
+.candle__body {
+    fill: var(--gh-up);
+}
+
+.candle[data-up='false'] .candle__wick {
+    stroke: var(--gh-down);
+}
+
+.candle[data-up='false'] .candle__body {
+    fill: var(--gh-down);
+}
+
+.chart__volume rect {
+    fill: var(--gh-up);
+    opacity: 0.35;
+}
+
+.chart__volume rect[data-up='false'] {
+    fill: var(--gh-down);
+}
+
+.chart__volume rect[data-active='true'] {
+    opacity: 0.8;
+}
+
+.chart__trend {
+    fill: none;
+    stroke: var(--gh-ma);
+    stroke-width: 1.5;
+    stroke-linejoin: round;
+}
+
+.chart__glint {
+    fill: var(--gh-ma);
+}
+
+.chart__sweep-stop {
+    stop-color: var(--gh-accent);
+}
+
+.chart__close {
+    stroke: var(--gh-up);
+    stroke-dasharray: 3 4;
+    opacity: 0.7;
+}
+
+.chart__point,
+.chart__pulse {
+    fill: var(--gh-up);
+}
+
+.chart__last[data-tone='down'] .chart__close,
+.chart__last[data-tone='down'] .chart__point,
+.chart__last[data-tone='down'] .chart__pulse {
+    stroke: var(--gh-down);
+    fill: var(--gh-down);
+}
+
+.chart__crosshair line {
+    stroke: var(--gh-muted);
+    stroke-dasharray: 2 3;
+    opacity: 0.7;
+}
+
+.chart__tag rect {
+    fill: var(--gh-fg);
+}
+
+.chart .chart__tag text {
+    fill: var(--gh-bg);
+    font-weight: 600;
+}
+
+.chart__tag[data-tone='up'] rect {
+    fill: var(--gh-up);
+}
+
+.chart__tag[data-tone='down'] rect {
+    fill: var(--gh-down);
+}
+
+.chart .chart__tag[data-tone] text {
+    fill: var(--gh-on-tone);
+}
+
+.pin {
+    cursor: pointer;
+}
+
+.pin__leader {
+    stroke: var(--gh-accent);
+    stroke-dasharray: 2 3;
+    opacity: 0.6;
+}
+
+.pin__glyph {
+    fill: var(--gh-accent);
+}
+
+.pin__chip {
+    fill: var(--gh-bg);
+    stroke: var(--gh-accent);
+}
+
+.chart .pin__label {
+    font-size: 12px;
+    font-weight: 500;
+    fill: var(--gh-accent);
+}
+
+.pin:hover .pin__chip,
+.pin:focus-visible .pin__chip {
+    fill: var(--gh-accent);
+}
+
+.chart .pin:hover .pin__label,
+.chart .pin:focus-visible .pin__label {
+    fill: var(--gh-bg);
+}
+
+.pin:hover .pin__leader,
+.pin:focus-visible .pin__leader {
+    opacity: 1;
+}
+
+.chart:not([data-entered='true']) .candle {
+    animation: record-rise 0.5s ease-out backwards;
+}
+
+.chart:not([data-entered='true']) .chart__volume rect {
+    transform-box: fill-box;
+    transform-origin: 50% 100%;
+    animation: record-grow 0.6s ease-out backwards;
+}
+
+.chart:not([data-entered='true']) .chart__trend {
+    stroke-dasharray: 1;
+    animation: record-draw 1.6s 1s ease-out backwards;
+}
+
+.chart:not([data-entered='true']) .pin {
+    animation: record-drop 0.5s 2s cubic-bezier(0.3, 1.6, 0.6, 1) backwards;
+}
+
+.candle__body--live {
+    transform-box: fill-box;
+    transform-origin: 50% 100%;
+    animation: record-tick 2.6s 2s ease-in-out infinite;
+}
+
+.candle[data-up='false'] .candle__body--live {
+    transform-origin: 50% 0%;
+}
+
+.chart__close {
+    animation: record-march 1.4s linear infinite;
+}
+
+.chart__pulse {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: record-pulse 2s ease-out infinite;
+}
+
+.chart__sweep {
+    animation: record-sweep 9s 3s linear infinite backwards;
+}
+
+@keyframes record-rise {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+}
+
+@keyframes record-grow {
+    from {
+        transform: scaleY(0);
+    }
+}
+
+@keyframes record-draw {
+    from {
+        stroke-dashoffset: 1;
+    }
+}
+
+@keyframes record-drop {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes record-tick {
+    25% {
+        transform: scaleY(0.78);
+    }
+
+    50% {
+        transform: scaleY(1.12);
+    }
+
+    75% {
+        transform: scaleY(0.92);
+    }
+}
+
+@keyframes record-march {
+    to {
+        stroke-dashoffset: -14;
+    }
+}
+
+@keyframes record-pulse {
+    from {
+        transform: scale(1);
+        opacity: 0.8;
+    }
+
+    to {
+        transform: scale(3.4);
+        opacity: 0;
+    }
+}
+
+@keyframes record-sweep {
+    from {
+        transform: translateX(-80px);
+    }
+
+    to {
+        transform: translateX(1100px);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .chart__glint,
+    .chart__sweep,
+    .chart__pulse {
+        display: none;
+    }
+}
+
+@media (pointer: coarse) {
+    .ranges__button {
+        min-height: 44px;
+    }
+}
+
+@media (max-width: 640px) {
+    .record__sheet {
+        padding: 12px 16px 32px;
+    }
+
+    .headline__figure {
+        text-align: left;
+    }
+}
+
 /* ---------- Narrow viewports ---------- */
 
 @media (max-width: 1199px) {

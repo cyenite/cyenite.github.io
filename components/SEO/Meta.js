@@ -8,33 +8,33 @@ const DESCRIPTION =
 const URL = 'https://cyenite.github.io/';
 const IMAGE = `${URL}images/logos/logo_1200.png`;
 
-export default function Meta() {
+export default function Meta({ title = TITLE, description = DESCRIPTION, path = '' }) {
     return (
         <Head>
-            <title>{TITLE}</title>
+            <title>{title}</title>
             <meta charSet="utf-8" />
             <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-            <meta name="description" content={DESCRIPTION} />
+            <meta name="description" content={description} />
             <meta name="author" content="Aaron Rono" />
             <meta name="robots" content="index, follow" />
             <meta name="theme-color" content="#f1f5f7" />
-            <link rel="canonical" href={URL} />
+            <link rel="canonical" href={`${URL}${path}`} />
 
             <meta property="og:type" content="website" />
             <meta property="og:site_name" content="Aaron Rono — The Survey" />
-            <meta property="og:title" content={TITLE} />
-            <meta property="og:description" content={DESCRIPTION} />
-            <meta property="og:url" content={URL} />
+            <meta property="og:title" content={title} />
+            <meta property="og:description" content={description} />
+            <meta property="og:url" content={`${URL}${path}`} />
             <meta property="og:image" content={IMAGE} />
 
             <meta name="twitter:card" content="summary_large_image" />
-            <meta name="twitter:title" content={TITLE} />
-            <meta name="twitter:description" content={DESCRIPTION} />
+            <meta name="twitter:title" content={title} />
+            <meta name="twitter:description" content={description} />
             <meta name="twitter:image" content={IMAGE} />
             <meta name="twitter:creator" content="@cyenite" />
 
-            <link rel="icon" href="./images/logos/fevicon.svg" />
-            <link rel="apple-touch-icon" href="./images/logos/logo.png" />
+            <link rel="icon" href="/images/logos/fevicon.svg" />
+            <link rel="apple-touch-icon" href="/images/logos/logo.png" />
 
             <script
                 type="application/ld+json"
